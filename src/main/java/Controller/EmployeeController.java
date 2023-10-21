@@ -1,6 +1,8 @@
 package Controller;
+
 import Service.Employee;
 import Service.EmployeeService;
+import Service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String name, @RequestParam String surname, @RequestParam double salary, @RequestParam int department) {
+    public Employee addEmployee(@RequestParam String name, @RequestParam String surname, @RequestParam double salary, @RequestParam int department) throws EmployeeServiceImpl.MaximumEmployeeException {
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(surname)) {
             throw new IllegalArgumentException("Name and surname cannot be empty");
         }
@@ -27,7 +29,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/remove")
-    public Employee removeEmployee(@RequestParam String name, @RequestParam String surname) {
+    public Employee removeEmployee(@RequestParam String name, @RequestParam String surname) throws EmployeeServiceImpl.EmployeeNotFoundException {
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(surname)) {
             throw new IllegalArgumentException("Name and surname cannot be empty");
         }
@@ -35,7 +37,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String name, @RequestParam String surname) {
+    public Employee findEmployee(@RequestParam String name, @RequestParam String surname) throws EmployeeServiceImpl.EmployeeNotFoundException {
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(surname)) {
             throw new IllegalArgumentException("Name and surname cannot be empty");
         }

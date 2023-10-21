@@ -1,4 +1,5 @@
 package Service;
+
 import io.micrometer.common.util.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void addEmployee(String name, String surname, double salary, int department) {
+    public Employee addEmployee(String name, String surname, double salary, int department) {
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(surname)) {
         }
+        return null;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findEmployee(String name, String surname){
+    public Employee findEmployee(String name, String surname) {
         return null;
     }
 

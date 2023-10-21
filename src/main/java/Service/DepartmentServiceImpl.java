@@ -1,7 +1,5 @@
 package Service;
 
-mport org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Comparator;
@@ -14,38 +12,43 @@ public abstract class DepartmentServiceImpl extends DepartmentService {
     private final EmployeeService employeeService;
 
     @Autowired
-    DepartmentServiceImpl(EmployeeService employeeService){
+    DepartmentServiceImpl(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
+
     @Autowired
-    public Employee findMinSalaryByDepartment(int numberOfDepartment){
+    public Employee findMinSalaryByDepartment(int numberOfDepartment) {
         return employeeService.getEmployeeMap().stream()
                 .filter(a -> a.getDepartment() == numberOfDepartment)
-                .min(Comparator.comparingInt(Employee::getSalary))
+                .min(Comparator.comparingInt(Employee.getSalary))
                 .orElseThrow(() -> new NoSuchElementException("Employee not Found"));
     }
+
     @Autowired
-    public Employee findMaxSalaryByDepartment(int numberOfDepartment){
+    public Employee findMaxSalaryByDepartment(int numberOfDepartment) {
         return employeeService.getEmployeeMap().stream()
                 .filter(a -> a.getDepartment() == numberOfDepartment)
-                .max(Comparator.comparingInt(Employee::getSalary))
+                .max(Comparator.comparingInt(Employee.getSalary))
                 .orElseThrow(() -> new NoSuchElementException("Employee not Found"));
     }
+
     @Autowired
-    public int getTotalSalaryCostByDepartment(int department){
+    public int getTotalSalaryCostByDepartment(int department) {
         return employeeService.getEmployeeMap().stream()
                 .filter(a -> a.getDepartment() == department)
-                .mapToInt(Employee::getSalary)
+                .mapToInt(Employee.getSalary)
                 .sum();
     }
+
     @Autowired
-    public Map<Integer, List<Employee>> getAllEmployeesByDepartment(int department){
+    public Map<Integer, List<Employee>> getAllEmployeesByDepartment(int department) {
         return employeeService.getEmployeeMap().stream()
                 .filter(a -> a.getDepartment() == department)
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
+
     @Autowired
-    public Map<Integer, List<Employee>> getAllEmployee(){
+    public Map<Integer, List<Employee>> getAllEmployee() {
         return employeeService.getEmployeeMap().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }

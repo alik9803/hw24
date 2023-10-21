@@ -1,9 +1,11 @@
 package Service;
 
 import java.util.Objects;
+import java.util.function.ToIntFunction;
 
 public class Employee {
 
+    public static ToIntFunction<? super Employee> getSalary;
     private String name;
     private String surname;
     private double salary;
